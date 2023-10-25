@@ -10,6 +10,11 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  {
+    path: 'podcast',
+    loadChildren: () =>
+      import('./modules/podcast/podcast.module').then((m) => m.PodCastModule),
+  },
 ];
 
 @NgModule({

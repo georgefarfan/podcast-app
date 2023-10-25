@@ -1,0 +1,18 @@
+.podcast {
+    &__list {
+        background-color: white;
+        &__title {
+            color: #0136b4;
+        }
+    }
+
+    tr {
+        height: 30px;
+        cursor: pointer;
+       
+    }
+
+    tr:nth-child(even) {
+        background-color: #f6f6f6;
+      }
+}

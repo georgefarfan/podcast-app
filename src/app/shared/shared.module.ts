@@ -27,7 +27,12 @@ export function HttpLoaderFactory(http: HttpClient): any {
       },
     }),
   ],
-  exports: [FilterPipe, PodCastCardComponent, PodCastInfoComponent],
+  exports: [
+    FilterPipe,
+    PodCastCardComponent,
+    PodCastInfoComponent,
+    TranslateModule,
+  ],
   providers: [TranslateStore],
   bootstrap: [],
 })
