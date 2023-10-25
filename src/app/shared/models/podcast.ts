@@ -1,24 +1,28 @@
-export interface PodCastResult {
-  feed: {
-    author: PodCastAuthor;
-    updated: {
-      label: string;
-    };
-    rights: {
-      label: string;
-    };
-    title: {
-      label: string;
-    };
-    icon: {
-      label: string;
-    };
-    link: PodCastLink[];
-    id: {
-      label: string;
-    };
-    entry: PodCastEntry[];
+import { PodCastDetail } from './podcast-detail';
+
+export interface PodCastFeed {
+  author: PodCastAuthor;
+  updated: {
+    label: string;
   };
+  rights: {
+    label: string;
+  };
+  title: {
+    label: string;
+  };
+  icon: {
+    label: string;
+  };
+  link: PodCastLink[];
+  id: {
+    label: string;
+  };
+  entry: PodCastEntry[];
+}
+
+export interface PodCastResult {
+  feed: PodCastFeed;
 }
 
 export interface PodCastAuthor {
@@ -105,4 +109,5 @@ export interface PodCastEntry {
       label: string;
     };
   };
+  detail?: PodCastDetail;
 }

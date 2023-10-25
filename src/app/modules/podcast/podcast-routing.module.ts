@@ -7,13 +7,11 @@ const routes: Routes = [
     path: ':id',
     component: PodCastComponent,
   },
-  /**
-   * {
+  {
     path: 'episode',
     loadChildren: () =>
       import('../episode/episode.module').then((m) => m.EpisodeModule),
   },
-   */
 ];
 
 @NgModule({

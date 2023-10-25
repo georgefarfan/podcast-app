@@ -9,13 +9,13 @@
       />
     </div>
 
-    <div class="podcast-dashboard__content" *ngIf="podcast$ | async as podcast">
+    <div
+      class="podcast-dashboard__content"
+      *ngIf="podcastEntry$ | async as podcastEntry"
+    >
       <app-podcast-card
         (click)="redirectToPodCast(entry)"
-        *ngFor="
-          let entry of podcast.feed.entry | filters : filterValue;
-          index as i
-        "
+        *ngFor="let entry of podcastEntry | filters : filterValue; index as i"
         [entry]="entry"
       ></app-podcast-card>
     </div>

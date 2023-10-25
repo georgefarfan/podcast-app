@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { PodCastDetail, PodCastDetailResult } from '../models/podcast-detail';
 import { PodCastService } from './podcast.service';
+import { PodCastResult } from '../models/podcast';
 
 @Injectable({ providedIn: 'root' })
 export class PodCastAdapterService {
@@ -16,5 +17,8 @@ export class PodCastAdapterService {
         } as PodCastDetail;
       })
     );
+  }
+  getTopList(): Observable<PodCastResult> {
+    return this.podCastService.getTopList();
   }
 }

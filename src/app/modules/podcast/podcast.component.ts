@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, distinctUntilChanged, filter, map } from 'rxjs';
 import { PodCastDetail } from 'src/app/shared/models/podcast-detail';
-import { PodCastAdapterService } from 'src/app/shared/services/podcast-adapter.service';
+import { findPodCast } from 'src/app/store/podcast.actions';
+import { selectCurrentPodCast } from 'src/app/store/podcast.selector';
 
 @Component({
   selector: 'app-podcast',
@@ -10,21 +12,22 @@ import { PodCastAdapterService } from 'src/app/shared/services/podcast-adapter.s
   styleUrls: ['./podcast.component.scss'],
 })
 export class PodCastComponent implements OnInit {
-  podCast$: Observable<PodCastDetail>;
+  podCast$: Observable<PodCastDetail> = this.store.select(selectCurrentPodCast);
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private podCastAdapterService: PodCastAdapterService
+    private store: Store<{}>,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.podCast$ = this.activatedRoute.params.pipe(
-      distinctUntilChanged(),
-      filter((params) => params['id']),
-      map((params) => params['id']),
-      switchMap((id) => {
-        return this.podCastAdapterService.getPodCast(id);
-      })
-    );
+    this.activatedRoute.params
+      .pipe(
+        distinctUntilChanged(),
+        filter((params) => params['id']),
+        map((params) => params['id'])
+      )
+      .subscribe((id: string) => {
+        this.store.dispatch(findPodCast({ data: id }));
+      });
   }
 }

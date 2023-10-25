@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PodCastEntry, PodCastResult } from 'src/app/shared/models/podcast';
-import { PodCastService } from 'src/app/shared/services/podcast.service';
+import { PodCastEntry } from 'src/app/shared/models/podcast';
+import { selectPodCastEntry } from 'src/app/store/podcast.selector';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,14 @@ import { PodCastService } from 'src/app/shared/services/podcast.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  podcast$: Observable<PodCastResult>;
+  podcastEntry$: Observable<PodCastEntry[]>;
   filterValue: string;
+  entry$ = this.store.select(selectPodCastEntry);
 
-  constructor(private podCastService: PodCastService, private router: Router) {}
+  constructor(private store: Store<{}>, private router: Router) {}
 
   ngOnInit(): void {
-    this.podcast$ = this.podCastService.getTopList();
+    this.podcastEntry$ = this.store.select(selectPodCastEntry);
   }
 
   redirectToPodCast(entry: PodCastEntry): void {
