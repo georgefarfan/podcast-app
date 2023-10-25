@@ -8,10 +8,10 @@
     </p>
   </div>
   <div class="divider mt-2 mb-2 ml-2 mr-2"></div>
-  <div class="ml-3">
+  <div class="ml-3 mr-3">
     <p class="f-14 f-bold mb-3">
       {{ "PODCAST.DETAIL.DESCRIPTION" | translate }}
     </p>
-    <p class="f-italic">{{ description }}</p>
+    <p class="f-italic" [innerHTML]="description"></p>
   </div>
 </div>

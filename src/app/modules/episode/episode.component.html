@@ -17,12 +17,12 @@
         <div class="card-box-shadow pl-4 pr-4 pt-3 pb-3">
           <div class="d-flex-col">
             <h2>{{ podCastTrackInfo.track.trackName }}</h2>
-            <p class="f-italic">{{ podCastTrackInfo.track.description }}</p>
-            <p class="f-italic">
-              {{ "PODCAST.DETAIL.TRACK.SPONSORED_BY" | translate }}
-            </p>
+            <p
+              class="f-italic"
+              [innerHTML]="podCastTrackInfo.track.description"
+            ></p>
 
-            <div>
+            <div class="mt-4">
               <audio class="w-100" controls>
                 <source
                   [src]="podCastTrackInfo.track.previewUrl"

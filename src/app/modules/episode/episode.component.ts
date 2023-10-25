@@ -9,8 +9,6 @@ import {
 } from 'src/app/shared/models/podcast-detail';
 import { findPodCastEpisode } from 'src/app/store/podcast.actions';
 import {
-  selectCurrentEpisode,
-  selectCurrentPodCast,
   selectCurrentPodCastId,
   selectCurrentPodCastTrackInfo,
 } from 'src/app/store/podcast.selector';
