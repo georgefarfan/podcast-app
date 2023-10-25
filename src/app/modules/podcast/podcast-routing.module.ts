@@ -5,12 +5,18 @@ import { PodCastComponent } from './podcast.component';
 const routes: Routes = [
   {
     path: ':id',
-    component: PodCastComponent,
-  },
-  {
-    path: 'episode',
-    loadChildren: () =>
-      import('../episode/episode.module').then((m) => m.EpisodeModule),
+    children: [
+      {
+        path: '',
+        component: PodCastComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'episode',
+        loadChildren: () =>
+          import('../episode/episode.module').then((m) => m.EpisodeModule),
+      },
+    ],
   },
 ];
 

@@ -12,13 +12,16 @@ import { selectPodCastEntry } from 'src/app/store/podcast.selector';
 })
 export class DashboardComponent implements OnInit {
   podcastEntry$: Observable<PodCastEntry[]>;
+  podcastEntry: PodCastEntry[];
+
   filterValue: string;
-  entry$ = this.store.select(selectPodCastEntry);
 
   constructor(private store: Store<{}>, private router: Router) {}
 
   ngOnInit(): void {
-    this.podcastEntry$ = this.store.select(selectPodCastEntry);
+    this.store.select(selectPodCastEntry).subscribe((entry) => {
+      this.podcastEntry = entry;
+    });
   }
 
   redirectToPodCast(entry: PodCastEntry): void {

@@ -1,18 +1,10 @@
-<div class="podcast-dashboard">
+<div class="podcast-dashboard pb-3">
   <div class="d-flex-col">
-    <div class="d-flex justify-content-end mb-3">
-      <input
-        [placeholder]="'PODCAST.FILTER.PLACEHOLDER' | translate"
-        type="text"
-        #search
-        [(ngModel)]="filterValue"
-      />
+    <div class="d-flex justify-content-end mb-4 mt-2">
+      <ng-container *ngTemplateOutlet="search"> </ng-container>
     </div>
 
-    <div
-      class="podcast-dashboard__content"
-      *ngIf="podcastEntry$ | async as podcastEntry"
-    >
+    <div class="podcast-dashboard__content">
       <app-podcast-card
         (click)="redirectToPodCast(entry)"
         *ngFor="let entry of podcastEntry | filters : filterValue; index as i"
@@ -21,3 +13,17 @@
     </div>
   </div>
 </div>
+
+<ng-template #search>
+  <div class="d-flex align-items-center">
+    <p class="mr-2 badge mb-0 mt-0">
+      {{ (podcastEntry | filters : filterValue).length }}
+    </p>
+    <input
+      [placeholder]="'PODCAST.FILTER.PLACEHOLDER' | translate"
+      type="text"
+      #search
+      [(ngModel)]="filterValue"
+    />
+  </div>
+</ng-template>

@@ -16,3 +16,8 @@ export function getError(callState: CallState): string | null {
   }
   return null;
 }
+
+export enum TransmissionState {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}

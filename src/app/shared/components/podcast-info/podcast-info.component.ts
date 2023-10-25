@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PodCastInfo } from '../../models/podcast-detail';
 
 @Component({
   selector: 'app-podcast-info',
@@ -8,7 +7,13 @@ import { PodCastInfo } from '../../models/podcast-detail';
 })
 export class PodCastInfoComponent implements OnInit {
   @Input()
-  data: PodCastInfo;
+  avatar: string;
+
+  @Input()
+  description: string;
+
+  @Input()
+  trackName: string;
 
   constructor() {}
 

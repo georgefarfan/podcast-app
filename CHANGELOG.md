@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Session storage service
 - PodCast store
 - Recovery data
+- Episode section, routing and store
+- Transnmission flag
+- Filter search counter
+
+### Changed
+
+- Style improvenments
 
 ## [0.0.1] - 2023-10-25
 

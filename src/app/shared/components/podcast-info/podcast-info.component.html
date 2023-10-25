@@ -1,17 +1,17 @@
 <div class="podcast-info d-flex-col card-box-shadow">
-  <img [src]="data.artworkUrl600" alt="" />
-  <div class="divider mt-2 mb-2 ml-2 mr-2"></div>
+  <img class="podcast-info__avatar" [src]="avatar" alt="" />
+  <div class="divider mt-1 mb-2 ml-2 mr-2"></div>
   <div class="ml-3 pt-2 pb-2">
-    <p class="f-16 f-bold mb-1">{{ data.trackName }}</p>
+    <p class="f-16 f-bold mb-1">{{ trackName }}</p>
     <p class="f-14 f-italic mt-0">
-      {{ "PODCAST.DETAIL.BY" | translate : { x: data.artistName } }}
+      {{ "PODCAST.DETAIL.BY" | translate : { x: trackName } }}
     </p>
   </div>
   <div class="divider mt-2 mb-2 ml-2 mr-2"></div>
   <div class="ml-3">
-    <p class="f-14 f-bold mb-0">
+    <p class="f-14 f-bold mb-3">
       {{ "PODCAST.DETAIL.DESCRIPTION" | translate }}
     </p>
-    <p class="f-italic"></p>
+    <p class="f-italic">{{ description }}</p>
   </div>
 </div>

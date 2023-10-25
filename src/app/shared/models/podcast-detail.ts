@@ -1,5 +1,10 @@
 import { TrackType } from '../types/podcast.type';
 
+export interface PodCastTrackInfo {
+  podCast: PodCastDetail;
+  track: Track;
+}
+
 export interface PodCastDetailResult {
   resultCount: number;
   results: TrackType[];
@@ -73,6 +78,7 @@ export interface PodCastInfo {
   contentAdvisoryRating: string;
   genreIds: string[];
   genres: string[];
+  summary?: string;
 }
 
 export interface TrackGenre {

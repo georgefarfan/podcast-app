@@ -1,18 +1,26 @@
-.podcast {
-    &__list {
-        background-color: white;
-        &__title {
-            color: #0136b4;
-        }
+.podcast-episode {
+  &__list {
+    background-color: white;
+    &__title {
+      color: #0136b4;
     }
+  }
 
-    tr {
-        height: 30px;
-        cursor: pointer;
-       
-    }
+  tr {
+    height: 30px;
+    cursor: pointer;
+  }
 
-    tr:nth-child(even) {
-        background-color: #f6f6f6;
-      }
+  tr:nth-child(even) {
+    background-color: #f6f6f6;
+  }
+
+  audio {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    height: 30px;
+    filter: sepia(0%) saturate(100%) grayscale(0) contrast(100%) invert(100%);
+  }
+
+   
 }

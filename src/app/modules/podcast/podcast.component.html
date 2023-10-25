@@ -1,11 +1,18 @@
 <div class="podcast">
-  <div class="d-flex" *ngIf="podCast$ | async as podCast">
+  <div
+    class="d-flex justify-content-between"
+    *ngIf="podCast$ | async as podCast"
+  >
     <div class="d-flex">
-      <app-podcast-info [data]="podCast.info"></app-podcast-info>
+      <app-podcast-info
+        [avatar]="podCast.info.artworkUrl600"
+        [trackName]="podCast.info.trackName"
+        [description]="podCast.info.summary ?? ''"
+      ></app-podcast-info>
     </div>
-    <div class="d-flex-col w-100 podcast__list">
+    <div class="d-flex-col w-70 podcast__list">
       <div>
-        <p class="card-box-shadow p-3 f-bold">
+        <h2 class="card-box-shadow p-3 f-bold">
           {{
             "PODCAST.DETAIL.EPISODES.TITLE"
               | translate
@@ -13,7 +20,7 @@
                     x: podCast.tracks.length
                   }
           }}
-        </p>
+        </h2>
 
         <table class="w-100 card-box-shadow pl-4 pr-4 pt-3 pb-3">
           <thead>
@@ -24,13 +31,18 @@
             <th class="text-left">
               {{ "PODCAST.DETAIL.EPISODES.LIST.DATE" | translate }}
             </th>
-            <th class="text-left">
+            <th class="text-center">
               {{ "PODCAST.DETAIL.EPISODES.LIST.DURATION" | translate }}
             </th>
           </thead>
 
-          <tr *ngFor="let track of podCast.tracks; index as i">
-            <td class="podcast__list__title">{{ track.trackName }}</td>
+          <tr
+            (click)="redirectToEpidose(track)"
+            *ngFor="let track of podCast.tracks; index as i"
+          >
+            <td class="podcast__list__title">
+              <p class="mb-0 ml-2 mt-0">{{ track.trackName }}</p>
+            </td>
             <td>{{ track.releaseDate | date : "shortDate" }}</td>
             <td class="text-center">
               {{ track.trackTimeMillis | date : "H:mm" }}

@@ -1,6 +1,8 @@
 .container-fluid {
     padding-left: 15%;
     padding-right: 15%;
+    padding-bottom: 50px;
+    padding-top: 30px;
 }
 
 .w-100 {
@@ -66,4 +68,38 @@ body {
 
 .card-box-shadow {
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgb(255, 25, 0);  
+    border-radius: 50%;  
+    animation: blink 2s infinite;  
+  }
+  
+   @keyframes blink {
+    0% {
+      opacity: 1;  
+    }
+    50% {
+      opacity: 0;  
+    }
+    100% {
+      opacity: 1;  
+    }
+  }
+
+  .badge {
+    background-color: #1a7eff;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  input {
+    height: 30px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #cbcbcb;
 }

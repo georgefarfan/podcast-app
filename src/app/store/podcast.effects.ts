@@ -4,17 +4,72 @@ import { exhaustMap, map, catchError, EMPTY, iif, of } from 'rxjs';
 import { PodCastAdapterService } from '../shared/services/podcast-adapter.service';
 import {
   findPodCast,
+  findPodCastEpisode,
+  findPodCastEpisodeSuccess,
   findPodCastSuccess,
   podCastList,
   podCastListSuccess,
 } from './podcast.actions';
 import { SessionStorageService } from '../core/session-storage.service';
-import { PodCastDetail } from '../shared/models/podcast-detail';
+import { PodCastDetail, Track } from '../shared/models/podcast-detail';
 import { PodCastFeed } from '../shared/models/podcast';
 import { COMPARE_DATES } from './podcast.const';
 
 @Injectable()
 export class PodCastEffects {
+  loadPodCastByIdEpisode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(findPodCastEpisode),
+      exhaustMap((params) => {
+        const currentPodCastList = this.sessionStorageService.getPodCastList();
+        let findTrack: any;
+
+        if (currentPodCastList) {
+          findTrack = currentPodCastList.entry.find((e) =>
+            e.detail?.tracks.find((t) => `${t.trackId}` === params.data)
+          );
+        }
+
+        return iif(
+          () => findTrack,
+          of(
+            findPodCastEpisodeSuccess({
+              data: {
+                ...findTrack?.detail,
+              },
+              track: findTrack.detail.tracks.find(
+                (t: Track) => `${t.trackId}` === params.data
+              ),
+            })
+          ),
+          this.podCastAdapterService.getPodCast(params.data).pipe(
+            map((data: PodCastDetail) => {
+              const currentPodCast = currentPodCastList as PodCastFeed;
+              const podCastFeed: PodCastFeed = {
+                ...currentPodCast,
+                entry: currentPodCast.entry.map((e) => {
+                  return {
+                    ...e,
+                    detail:
+                      e.id.attributes['im:id'] === params.data
+                        ? data
+                        : e.detail,
+                  };
+                }),
+              };
+              this.sessionStorageService.setPodCastList(podCastFeed);
+              const track = findTrack.detail.tracks.find(
+                (t: Track) => `${t.trackId}` === params.data
+              );
+              return findPodCastEpisodeSuccess({ data, track });
+            }),
+            catchError(() => EMPTY)
+          )
+        );
+      })
+    )
+  );
+
   loadPodCast$ = createEffect(() =>
     this.actions$.pipe(
       ofType(findPodCast),

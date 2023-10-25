@@ -5,8 +5,12 @@ import {
   PodCastEntry,
   PodCastLink,
 } from '../shared/models/podcast';
-import { LoadingState } from './podcast-store.model';
-import { PodCastDetail } from '../shared/models/podcast-detail';
+import { LoadingState, TransmissionState } from './podcast-store.model';
+import {
+  PodCastDetail,
+  PodCastTrackInfo,
+  Track,
+} from '../shared/models/podcast-detail';
 
 export const featureKey = 'podCast';
 
@@ -29,7 +33,13 @@ export const selectIsLoaded = createSelector(
 
 export const selectPodCastEntry = createSelector(
   selectPodCast,
-  (state: PodCastState): PodCastEntry[] => state.data.entry
+  (state: PodCastState): PodCastEntry[] =>
+    state.data.entry.map((e) => {
+      return {
+        ...e,
+        mainImage: e['im:image'][e['im:image'].length - 1],
+      };
+    })
 );
 
 export const selectPodCastLink = createSelector(
@@ -70,4 +80,33 @@ export const selectPodCastIcon = createSelector(
 export const selectCurrentPodCast = createSelector(
   selectPodCast,
   (state: PodCastState): PodCastDetail => state.currentPodCast
+);
+
+export const selectCurrentPodCastId = createSelector(
+  selectPodCast,
+  (state: PodCastState): number => state.currentPodCast.info.trackId
+);
+
+export const selectCurrentEpisode = createSelector(
+  selectPodCast,
+  (state: PodCastState): Track => {
+    return state.currentTrack;
+  }
+);
+
+export const selectCurrentPodCastTrackInfo = createSelector(
+  selectPodCast,
+  (state: PodCastState): PodCastTrackInfo => {
+    return {
+      podCast: state.currentPodCast,
+      track: state.currentTrack,
+    };
+  }
+);
+
+export const selectIsTransmissionActive = createSelector(
+  selectPodCast,
+  (state: PodCastState): boolean => {
+    return state.transmissionState === TransmissionState.ACTIVE;
+  }
 );

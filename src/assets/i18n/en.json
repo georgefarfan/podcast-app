@@ -19,6 +19,9 @@
                     "DATE":"Date",
                     "DURATION":"Duration"
                 }
+            },
+            "TRACK": {
+                "SPONSORED_BY": "This episode is sponsored by"
             }
         }
     }

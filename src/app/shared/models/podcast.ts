@@ -110,4 +110,5 @@ export interface PodCastEntry {
     };
   };
   detail?: PodCastDetail;
+  mainImage?: PodCastImage;
 }
