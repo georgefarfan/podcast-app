@@ -1,0 +1,15 @@
+.podcast-card { 
+    cursor: pointer;
+   position: relative;
+     img {
+        border-radius: 100px;
+    }
+    &__content { 
+        border: 1px solid;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        height: 90px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+}

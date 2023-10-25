@@ -1,0 +1,25 @@
+{
+    "PODCASTER": {
+        "TITLE": "Podcaster"
+    },
+    "PODCAST": {
+        "AUTHOR": {
+            "LABEL": "Author: {{x}}"
+        },
+        "FILTER": {
+            "PLACEHOLDER": "Filter podcasts..."
+        },
+        "DETAIL": {
+            "BY": "by {{x}}",
+            "DESCRIPTION": "Description: ",
+            "EPISODES": {
+                "TITLE":"Episodes: {{x}}",
+                "LIST": {
+                    "TITLE":"Title",
+                    "DATE":"Date",
+                    "DURATION":"Duration"
+                }
+            }
+        }
+    }
+}
